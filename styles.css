@@ -23,8 +23,8 @@ html, body {
 
 body {
 	font-family: "Intro";
-	background-color: #0295BE;
-}
+/*	background-color: #000000;
+*/}
 
 #drawer {
 	transition:height 1s ease-out;

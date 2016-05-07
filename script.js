@@ -49,7 +49,7 @@ var post_game;
 
 var choice_made;
 var choice_required;
-let hideDelay = 4000;
+var hideDelay = 4000;
 
 var CURRENT_SCORE = 710;
 
@@ -82,7 +82,7 @@ function init() {
 
    gameInfo = document.getElementById("game_info");
    feed = document.getElementById("action_feed");
-   cash = document.getElementById("cash");
+   cashcount = document.getElementById("cash");
 
    post_game = document.getElementById("post_game");
 
@@ -161,9 +161,9 @@ function presentChoices(city) {
 	choice_made = false;
 	choice_required = true;
 
-   choiceA = city.choices[0];
-   choiceB = city.choices[1];
-   choiceC = city.choices[2];
+    choiceA = city.choices[0];
+    choiceB = city.choices[1];
+    choiceC = city.choices[2];
 
 	choice_A.style.opacity = "1.0";
 	choice_B.style.opacity = "1.0";
@@ -193,6 +193,7 @@ function selectChoiceA() {
    /* Add cash and update salary. */
    salary += choiceA.salary_change;
    cash += choiceA.cash_change + choiceA.salary_change;
+   updateCashValue(cash);
 
    if (curSection == 13) {
       aboutToEnd = true;
@@ -221,6 +222,7 @@ function selectChoiceB() {
    /* Add cash and update salary. */
    salary += choiceB.salary_change;
    cash += choiceB.cash_change + choiceB.salary_change;
+   updateCashValue(cash);
 
    if (curSection == 13) {
       aboutToEnd = true;
@@ -249,6 +251,7 @@ function selectChoiceC() {
    /* Add cash and update salary. */
    salary += choiceC.salary_change;
    cash += choiceC.cash_change + choiceC.salary_change;
+   updateCashValue(cash);
 
    if (curSection == 13) {
       aboutToEnd = true;
@@ -410,7 +413,7 @@ function newActionFeedItem(txt) {
 }
 
 function updateCashValue(newVal) {
-	cash.innerHTML = newVal.toString();
+	cashcount.innerHTML = newVal.toString();
 }
 
 function gameOver() {
