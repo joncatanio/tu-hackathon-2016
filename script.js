@@ -1,11 +1,13 @@
 /* Canvas Elements */
 var canvas;
 var ctx;
+var windowHeight;
+var windowWidth;
+var backgroundWidth;
+var backgroundHeight;
+var padding;
 
-/* Images */
-var img_chicago;
-var img_iowa;
-var img_filler1;
+var images;
 
 /* drawer elements */
 var drawer;
@@ -42,15 +44,61 @@ function init() {
 
    canvas = document.getElementById('mainScene');
    ctx = canvas.getContext('2d');
-   ctx.canvas.width  = window.innerWidth;
+   ctx.imageSmoothingEnabled = false;
+   ctx.canvas.width  = windowWidth = window.innerWidth;
    ctx.canvas.height = window.innerHeight;
+   windowHeight = window.innerHeight;
    
-   img_chicago = new Image();
-   img_chicago.src = 'images/c1.png';
-   img_chicago.onload = function() {
-      drawPattern(img_chicago, ctx.canvas.width, ctx.canvas.height);
+/*   level1 = new Image();
+   level1.src = 'images/level1.png';
+   level1.onload = function() {
+      drawPattern(level1, ctx.canvas.width, ctx.canvas.height);
+      //ctx.drawImage(level1, 0, -level1.height + windowHeight);
+   }*/
+}
+
+/***** Load Images *****/
+function loadImages(sources, callback) {
+   images = {};
+   var loadedImages = 0;
+   var numImages = 0;
+   // get num of sources
+   for(var src in sources) {
+      numImages++;
+   }
+   for(var src in sources) {
+      images[src] = new Image();
+      images[src].onload = function() {
+         if(++loadedImages >= numImages) {
+            callback(images);
+         }
+      };
+      images[src].src = sources[src];
    }
 }
+
+var sources = {
+   level1: 'images/level1.png'
+};
+
+loadImages(sources, function(images) {
+/*   var tempCanvas = document.createElement("canvas"),
+      tCtx = tempCanvas.getContext("2d");
+
+   tempCanvas.width = ctx.canvas.width;
+   tempCanvas.height = ctx.canvas.height;
+*/
+   backgroundWidth = (1 / 2) * windowWidth;
+   backgroundHeight = (images.level1.height / images.level1.width) * backgroundWidth;
+   padding = (windowWidth - backgroundWidth) / 2;
+
+   ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight, backgroundWidth, backgroundHeight); 
+
+  // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  // ctx.fillStyle = ctx.createPattern(tempCanvas, 'repeat');
+
+  // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+});
 
 function hideDrawer() {
 	drawer.style.height = "0px";
@@ -125,37 +173,24 @@ var isDirty = false;
 function update() {
    if (Keys.up) {
       console.log("up");  
-      dy+=3;
+      dy+=5;
       isDirty = true;
    }
    else if (Keys.down) {
-      // console.log("down");
       if (!lock_choice) {
       	selectChoiceB();
       }
-
-      /* May not need to render changes if the boxes are just selecting. */
-      dy-=3;
-      isDirty = true;
    }
 
    if (Keys.left) {
-      // console.log("left");
       if (!lock_choice) {
       	selectChoiceA();
       }
-
-      /* May not need to render changes if the boxes are just selecting. */
-      //isDirty = true;
    }
    else if (Keys.right) {
-      // console.log("right");
       if (!lock_choice) {
       	selectChoiceC();
       }
-
-      /* May not need to render changes if the boxes are just selecting. */
-      //isDirty = true;
    }
 
    if (isDirty) render();
@@ -164,8 +199,9 @@ function update() {
 requestAnimationFrame(update);
 
 function render() {
-   ctx.setTransform(1,0,0,1,dx,dy);
-   ctx.fillRect(-dx, -dy, ctx.canvas.width, ctx.canvas.height);
+   //ctx.setTransform(1,0,0,1,dx,dy);
+   //ctx.fillRect(-dx, -dy, ctx.canvas.width, ctx.canvas.height);
+   ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight + dy, backgroundWidth, backgroundHeight);
    isDirty= false;
 }
 
@@ -210,6 +246,4 @@ function tryAgain() {
 	post_game.style.display = "none";
 	gameInfo.style.display = "block";
 }
-
-gameOver();
 
