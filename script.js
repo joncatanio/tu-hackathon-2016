@@ -15,13 +15,24 @@ var trainPaddingTop;
 var images;
 
 /* Movement/Functionality */
-var trainSpeed = 10;
+var trainSpeed = 2;
 
 /* drawer elements */
 var drawer;
 var choice_A;
 var choice_B;
 var choice_C;
+
+/* drawer helpers */
+var sectionInterval;
+var totalInterval;
+var curSection;
+var sec3seen;
+var sec5seen;
+var sec7seen;
+var sec8seen;
+var sec11seen;
+var sec13seen;
 
 var gameInfo;
 var feed;
@@ -110,10 +121,11 @@ loadImages(sources, function(images) {
    trainPaddingTop = (1/2) * windowHeight;
    ctx.drawImage(images.train, 0 + trainPadding, 0 + trainPaddingTop, trainWidth, trainHeight);
 
-  // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  // ctx.fillStyle = ctx.createPattern(tempCanvas, 'repeat');
-
-  // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+   /* Calculate drawer intervals. */
+   sectionInterval = backgroundHeight / 13; // 13 screens total, drawer every two.
+   totalInterval = sectionInterval;
+   curSection = 1;
+   sec3seen = sec5seen = sec7seen = sec8seen = sec11seen = sec13seen = false;
 });
 
 function hideDrawer() {
@@ -218,6 +230,36 @@ function update() {
 requestAnimationFrame(update);
 
 function render() {
+   if (dy > totalInterval) {
+      totalInterval += sectionInterval;
+      ++curSection;
+   }
+
+   /* Let the magic be magical. */
+   if ((curSection == 3 && !sec3seen) || (curSection == 5 && !sec5seen) || 
+    (curSection == 7 && !sec7seen) || (curSection == 8 && !sec8seen)
+    || (curSection == 11 && !sec11seen) || (curSection == 13 && !sec13seen)) {
+      alert("Choices!");
+      if (curSection == 3) {
+         sec3seen = true;
+      }
+      else if (curSection == 5) {
+         sec5seen = true;
+      }
+      else if (curSection == 7) {
+         sec7seen = true;
+      }
+      else if (curSection == 8) {
+         sec8seen = true;
+      }
+      else if (curSection == 11) {
+         sec11seen = true;
+      }
+      else if (curSection == 13) {
+         sec13seen = true;
+      }
+      ++trainSpeed;
+   }
    /* Background */
    ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight + dy, backgroundWidth, backgroundHeight);
 
