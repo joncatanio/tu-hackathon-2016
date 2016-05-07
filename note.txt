@@ -1,0 +1,26 @@
+Game Features:
+Jobs
+- Train Engineer
+- Freelancer
+- Coal Shoveler
+- Chef
+- Doctor for Zombie Injuries
+
+Loans:
+- Train car loan
+- Cow
+- Tiger
+- Robot
+- Land/house
+- Good fiscal quarter
+
+Medical Expenses:
+- Train derailment
+- Disease
+
+Etc:
+- Mugged by gnomes
+- Mom stole security number
+- Smashed piggy bank
+- Credit trainer
+- Siderodromoophobia
