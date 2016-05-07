@@ -47,6 +47,8 @@ var choice_made;
 var choice_required;
 let hideDelay = 4000;
 
+var CURRENT_SCORE = 710;
+
 // ******* Movement *******
 var Keys = {
    up: false,
@@ -142,7 +144,8 @@ function hideDrawer() {
 }
 
 function showDrawer() {
-	drawer.style.height = "165px";
+	h = $(window).height();
+	drawer.style.height = (h/3).toString() + "px";
 	choice_made = false;
 }
 
@@ -377,3 +380,28 @@ function tryAgain() {
    location.reload();
 }
 
+function updateScoreViaSimulator(req_type, req_param) {
+
+	req = {
+		'score': CURRENT_SCORE,
+	}
+	req[req_type] = req_param
+
+	$.ajax({
+			dataType: "json",
+			contentType: "application/json",
+			url: "http://ec2-52-53-177-180.us-west-1.compute.amazonaws.com/score-simulator/scoresim/simulateScore",
+			type: "POST",
+			data: JSON.stringify(req),
+			success: function(res) { console.log(res['score'], res['description_text'][0]);  },
+			error:   function(res) { console.warn(res); }
+		});
+}
+
+// test = {
+// 	'score': 710,
+// 	'event' : {
+// 		'zombie_apocalypse': 'CREDIT_IS_IRRELEVANT',
+// 	}
+// }
+// updateScoreViaSimulator(test);

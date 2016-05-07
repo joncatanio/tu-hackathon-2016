@@ -13,6 +13,7 @@ canvas {
 }
 
 html, body {
+  overflow: hidden;
   width:  100%;
   height: 100%;
   /*background-image: url("./images/stamp.png");
@@ -21,7 +22,8 @@ html, body {
 }
 
 body {
-	font-family: "Intro"
+	font-family: "Intro";
+	background-color: #0295BE;
 }
 
 #drawer {
