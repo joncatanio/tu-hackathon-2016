@@ -36,12 +36,12 @@ let hideDelay = 4000;
 init();
 
 function init() {
-	setTimeout(showDrawer, 2000);
 	choice_made = false;
 	choice_required = true;
 	/* drawer elements */
 
    drawer = document.getElementById('drawer');
+   message = document.getElementById('message');
    choice_A = document.getElementById('choice_A');
    choice_B = document.getElementById('choice_B');
    choice_C = document.getElementById('choice_C');
@@ -65,6 +65,8 @@ function init() {
       drawPattern(level1, ctx.canvas.width, ctx.canvas.height);
       //ctx.drawImage(level1, 0, -level1.height + windowHeight);
    }*/
+
+   setTimeout(presentChoices("You're leaving chicago", "A", "A!", "B", "B!", "C", "C!"), 2000);
 }
 
 /***** Load Images *****/
@@ -123,6 +125,20 @@ function hideDrawer() {
 function showDrawer() {
 	drawer.style.height = "165px";
 	choice_made = false;
+}
+
+function presentChoices(msg, a_title, a_txt, b_title, b_txt, c_title, c_txt ) {
+	message.innerHTML = msg;
+	choice_A.childNodes[1].innerHTML = a_title;
+	choice_A.childNodes[3].innerHTML = a_txt;
+
+	choice_B.childNodes[1].innerHTML = b_title;
+	choice_B.childNodes[3].innerHTML = b_txt;
+
+	choice_C.childNodes[1].innerHTML = c_title;
+	choice_C.childNodes[3].innerHTML = c_txt;
+
+	showDrawer();
 }
 
 function selectChoiceA() {

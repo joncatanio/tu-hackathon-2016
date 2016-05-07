@@ -17,7 +17,7 @@ html, body {
   height: 100%;
   /*background-image: url("./images/stamp.png");
   background-repeat: repeat;*/
- 
+
 }
 
 body {
@@ -31,6 +31,7 @@ body {
     position: absolute;
     z-index: 2;
     top: 0;
+    width: 100%;
 }
 
 #drawer_main {
