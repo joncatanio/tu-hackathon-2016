@@ -16,6 +16,7 @@ var images;
 
 /* Movement/Functionality */
 var trainSpeed = 2;
+var i = 0;
 
 /* drawer elements */
 var drawer;
@@ -34,9 +35,11 @@ var sec8seen;
 var sec11seen;
 var sec13seen;
 
+/* Game Stuff */
 var gameInfo;
 var feed;
 var cash;
+var aboutToEnd; 
 
 var post_game;
 
@@ -58,6 +61,7 @@ init();
 function init() {
 	choice_made = false;
 	choice_required = true;
+   aboutToEnd = false;
 	/* drawer elements */
 
    drawer = document.getElementById('drawer');
@@ -115,12 +119,6 @@ var sources = {
 };
 
 loadImages(sources, function(images) {
-/*   var tempCanvas = document.createElement("canvas"),
-      tCtx = tempCanvas.getContext("2d");
-
-   tempCanvas.width = ctx.canvas.width;
-   tempCanvas.height = ctx.canvas.height;
-*/
    backgroundWidth = (1 / 2) * windowWidth;
    backgroundHeight = (images.level1.height / images.level1.width) * backgroundWidth;
    padding = (windowWidth - backgroundWidth) / 2;
@@ -174,9 +172,16 @@ function selectChoiceA() {
 	choice_B.style.opacity = "0.3"
 	choice_C.style.opacity = "0.3"
 	newActionFeedItem("Sprouted wings and flew away.");
-	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
+
+   if (curSection == 13) {
+      aboutToEnd = true;
+      hideDrawer();
+   }
+   else {
+	   setTimeout(hideDrawer, hideDelay);
+   }
 }
 
 function selectChoiceB() {
@@ -187,6 +192,14 @@ function selectChoiceB() {
 	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
+
+   if (curSection == 13) {
+      aboutToEnd = true;
+      hideDrawer();
+   }
+   else {
+	   setTimeout(hideDrawer, hideDelay);
+   }
 }
 
 function selectChoiceC() {
@@ -197,6 +210,14 @@ function selectChoiceC() {
 	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
+
+   if (curSection == 13) {
+      aboutToEnd = true;
+      hideDrawer();
+   }
+   else {
+	   setTimeout(hideDrawer, hideDelay);
+   }
 }
 
 render();
@@ -286,8 +307,8 @@ function render() {
       	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
          sec13seen = true;
       }
-      ++trainSpeed;
       Keys.up = false;
+      ++trainSpeed;
    }
    /* Background */
    ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight + dy, backgroundWidth, backgroundHeight);
@@ -295,7 +316,24 @@ function render() {
    /* Train */
    ctx.drawImage(images.train, 0 + trainPadding, 0 + trainPaddingTop, trainWidth, trainHeight);
 
+   /* End game. */
+   if (aboutToEnd) {
+      choice_required = true; // Takes away movement. 
+
+      drawTrainOff();
+
+      gameOver();
+   }
+
    isDirty= false;
+}
+
+/* Draw forever little train. */
+function drawTrainOff() {
+   i+=5;
+   ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight + dy, backgroundWidth, backgroundHeight);
+   ctx.drawImage(images.train, 0 + trainPadding, 0 + trainPaddingTop - i, trainWidth, trainHeight);
+   requestAnimationFrame(drawTrainOff);
 }
 
 function drawPattern(img, xSize, ySize) {
@@ -336,7 +374,6 @@ function gameOver() {
 }
 
 function tryAgain() {
-	post_game.style.display = "none";
-	gameInfo.style.display = "block";
+   location.reload();
 }
 
