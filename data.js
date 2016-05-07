@@ -1,6 +1,6 @@
 var data = {
 	'Chicago': {
-		'prompt': "You're setting off from Chicago. You decide to:",
+		'prompt': "YOU'RE SETTING OFF FROM CHICAGO. YOU DECIDE TO:",
 		'choices': [
 			{
 				'type': 'new_job-higher_income',
@@ -32,7 +32,7 @@ var data = {
 	},
 
 	'Iowa': {
-		'prompt': "Welcome to Iowa! It's time to:",
+		'prompt': "WELCOME TO IOWA! IT'S TIME TO:",
 		'choices': [
 			{
 				'type': 'start_college',
@@ -64,7 +64,7 @@ var data = {
 	},
 		
 	'Denver': {
-		'prompt': "Heading through Denver up into the Rocky Mountains you need:",
+		'prompt': "HEADING THROUGH DENVER UP INTO THE ROCKY MOUNTAINS YOU NEED:",
 		'choices': [
 			{
 				'type': 'divorce',
@@ -96,7 +96,7 @@ var data = {
 	},
 
 	'Aspen': {
-		'prompt': "You've reached Aspen, Colorado time to hit the slopes and get:",
+		'prompt': "YOU'VE REACHED ASPEN, COLORADO TIME TO HIT THE SLOPES AND GET:",
 		'choices': [
 			{
 				'type': 'unexpected_medical_expense',
@@ -128,7 +128,7 @@ var data = {
 	},
 
 	'Vegas': {
-		'prompt': "What happens in Vegas, stays in Vegas... or does it:",
+		'prompt': "WHAT HAPPENS IN VEGAS, STAYS IN VEGAS... OR DOES IT:",
 		'choices': [
 			{
 				'type': 'DUI',
@@ -160,7 +160,7 @@ var data = {
 	},
 
 	'Death_Valley': {
-		'prompt': "Passing through Death Valley might be rough, get:",
+		'prompt': "PASSING THROUGH DEATH VALLEY MIGHT BE ROUGH, GET:",
 		'choices': [
 			{
 				'type': 'unexpected_medical_expense',
@@ -192,7 +192,7 @@ var data = {
 	},
 
 	'SLO': {
-		'prompt': "We are haved arrived in San Luis Obispo don't forget to:",
+		'prompt': "WE HAVED ARRIVED IN SAN LUIS OBISPO DON'T FORGET TO:",
 		'choices': [
 			{
 				'type': 'gradute_college',
