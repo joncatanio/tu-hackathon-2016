@@ -1,10 +1,3 @@
-/* drawer elements */
-
-var drawer = document.getElementById('drawer');
-var choice_A = document.getElementById('choice_A_text');
-var choice_B = document.getElementById('choice_B_text');
-var choice_C = document.getElementById('choice_C_text');
-
 /* Canvas Elements */
 var canvas;
 var ctx;
@@ -14,9 +7,27 @@ var img_chicago;
 var img_iowa;
 var img_filler1;
 
+/* drawer elements */
+var drawer;
+var choice_A;
+var choice_B;
+var choice_C;
+
+var lock_choice;
+let hideDelay = 4000;
+
 init();
 
 function init() {
+	setTimeout(showDrawer, 2000);
+	lock_choice = false;
+	/* drawer elements */
+
+   drawer = document.getElementById('drawer');
+   choice_A = document.getElementById('choice_A');
+   choice_B = document.getElementById('choice_B');
+   choice_C = document.getElementById('choice_C');
+
    canvas = document.getElementById('mainScene');
    ctx = canvas.getContext('2d');
    ctx.canvas.width  = window.innerWidth;
@@ -28,6 +39,40 @@ function init() {
       drawPattern(img_chicago, ctx.canvas.width, ctx.canvas.height);
    }
 }
+
+function hideDrawer() {
+	drawer.style.height = "0px";
+}
+
+function showDrawer() {
+	drawer.style.height = "165px";
+	lock_choice = false;
+}
+
+function selectChoiceA() {
+	//choice_A.style.backgroundColor = "whitesmoke"
+	choice_B.style.opacity = "0.3"
+	choice_C.style.opacity = "0.3"
+	setTimeout(hideDrawer, hideDelay);
+	lock_choice = true;
+}
+
+function selectChoiceB() {
+	//choice_B.style.backgroundColor = "whitesmoke"
+	choice_A.style.opacity = "0.3"
+	choice_C.style.opacity = "0.3"
+	setTimeout(hideDrawer, hideDelay);
+	lock_choice = true;
+}
+
+function selectChoiceC() {
+	//choice_C.style.backgroundColor = "whitesmoke"
+	choice_A.style.opacity = "0.3"
+	choice_B.style.opacity = "0.3"
+	setTimeout(hideDrawer, hideDelay);
+	lock_choice = true;
+}
+
 
 // ******* Movement *******
 var Keys = {
@@ -69,22 +114,31 @@ function update() {
       isDirty = true;
    }
    else if (Keys.down) {
-      console.log("down");
-      /* ADD CHANGES HERE */
+      // console.log("down");
+      if (!lock_choice) {
+      	selectChoiceB();
+      }
+
       /* May not need to render changes if the boxes are just selecting. */
       dy-=3;
       isDirty = true;
    }
 
    if (Keys.left) {
-      console.log("left");
-      /* ADD CHANGES HERE */
+      // console.log("left");
+      if (!lock_choice) {
+      	selectChoiceA();
+      }
+
       /* May not need to render changes if the boxes are just selecting. */
       //isDirty = true;
    }
    else if (Keys.right) {
-      console.log("right");
-      /* ADD CHANGES HERE */
+      // console.log("right");
+      if (!lock_choice) {
+      	selectChoiceC();
+      }
+
       /* May not need to render changes if the boxes are just selecting. */
       //isDirty = true;
    }

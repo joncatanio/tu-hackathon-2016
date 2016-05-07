@@ -1,5 +1,10 @@
+@font-face {
+    font-family: "Intro";
+    src: url("./font/IntroRegular.ttf");
+}
+
 * {
-   margin: 0;
+	margin: 0;
 }
 
 canvas {
@@ -9,4 +14,78 @@ canvas {
 html, body {
   width:  100%;
   height: 100%;
+}
+
+body {
+	font-family: "Intro"
+}
+
+#drawer {
+	transition:height 1s ease-out;
+    height:0;
+    overflow:hidden;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+}
+
+#drawer_main {
+	overflow: hidden;
+}
+
+#drawer_top {
+	width: 100%;
+	height: 35px;
+	background-color: whitesmoke;
+}
+
+#message {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.drawer_top_item {
+	/* float: left; */
+}
+
+.choice {
+	text-align: center;
+	float: left;
+	width: 33.333%;
+	background-color: white;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.choice_title {
+	font-weight: bold;
+}
+
+.choice_text {
+	width: 75%;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#game_info {
+	position: absolute;
+	width: 250px;
+	height: 150px;
+	background-color: white;
+	z-index: 2;
+	right: 0px;
+    bottom: 0px;
+}
+
+#action_feed {
+	text-align: right;
+	font-size: 15px;
+	padding: 10px;
+}
+
+#cash {
+	text-align: right;
+	padding: 10px;
+	font-size: 25px;
 }

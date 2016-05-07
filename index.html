@@ -4,26 +4,47 @@
 <meta charset="UTF-8">
 <title>Credit Trainer</title> 
 <link rel="stylesheet" href="styles.css"/>
-
 </head>
+
 <body>
-   <img
 	<div id="drawer">
-		This is the drawer
-		<div id="choice_A" class="choice">
-			Choice A
+		<div id="drawer_top">
+			<!-- <div id="logomark" class="drawer_top_item">CreditTrainer</div> -->
+			<div id="message" class="drawer_top_item">You're setting off from Chicago! Do you:</div>
 		</div>
-		<div id="choice_B" class="choice">
-			Choice B
-		</div>
-		<div id="choice_B" class="choice">
-			Choice C
+		<div id="drawer_main">
+			<div id="choice_A" class="choice">
+				<span class="choice_title">Upgrade your train car?</span>
+				<p class="choice_text">Get some spinners on that ride, it will give you more swag.</p>
+				<img src="images/left.png" alt="A" height="30" width="30">
+
+			</div>
+			<div id="choice_B" class="choice">
+				<span class="choice_title">Go to train engineer school?</span>
+				<p class="choice_text">You'll have to take out student loans to pay for it all, but there's potential for a sweet salary!</p>
+				<img src="images/down.png" alt="B" height="30" width="30">
+			</div>
+			<div id="choice_C" class="choice">
+				<span class="choice_title">Get married.</span>
+				<p class="choice_text">You don't like her very much but she has a swell credit score.</p>
+				<img src="images/right.png" alt="C" height="30" width="30">
+			</div>
 		</div>
 	</div>
 
 	<canvas id="mainScene">
 
 	</canvas>
+
+	<div id="game_info">
+		<div id="action_feed">
+			<p class="feed_item">Began journey.</p>
+			<p class="feed_item">Took out loan for nice cow.</p>
+			<p class="feed_item">Attended train engineer school.</p>
+			<p class="feed_item">Achieved good credit dowry.</p>
+		</div>
+		<div id="cash">$12500</div>
+	</div>
 
 	<script src="script.js" type="text/javascript" charset="utf-8"></script>
 </body>
