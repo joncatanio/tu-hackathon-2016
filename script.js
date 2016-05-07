@@ -16,6 +16,7 @@ var images;
 
 /* Movement/Functionality */
 var trainSpeed = 2;
+var i = 0;
 
 /* drawer elements */
 var drawer;
@@ -34,9 +35,11 @@ var sec8seen;
 var sec11seen;
 var sec13seen;
 
+/* Game Stuff */
 var gameInfo;
 var feed;
 var cash;
+var aboutToEnd; 
 
 var post_game;
 
@@ -56,8 +59,10 @@ var Keys = {
 init();
 
 function init() {
+
    choice_made = false;
    choice_required = true;
+   aboutToEnd = false;
 
    drawer = document.getElementById('drawer');
    message = document.getElementById('message');
@@ -85,7 +90,7 @@ function init() {
       //ctx.drawImage(level1, 0, -level1.height + windowHeight);
    }*/
 
-   setTimeout(presentChoices("You're leaving chicago", "A", "A!", "B", "B!", "C", "C!"), 2000);
+   setTimeout(presentChoices(data['Chicago']), 2000);
 }
 
 /***** Load Images *****/
@@ -114,12 +119,6 @@ var sources = {
 };
 
 loadImages(sources, function(images) {
-/*   var tempCanvas = document.createElement("canvas"),
-      tCtx = tempCanvas.getContext("2d");
-
-   tempCanvas.width = ctx.canvas.width;
-   tempCanvas.height = ctx.canvas.height;
-*/
    backgroundWidth = (1 / 2) * windowWidth;
    backgroundHeight = (images.level1.height / images.level1.width) * backgroundWidth;
    padding = (windowWidth - backgroundWidth) / 2;
@@ -147,7 +146,7 @@ function showDrawer() {
 	choice_made = false;
 }
 
-function presentChoices(msg, a_title, a_txt, b_title, b_txt, c_title, c_txt ) {
+function presentChoices(city) {
 	choice_made = false;
 	choice_required = true;
 
@@ -155,15 +154,15 @@ function presentChoices(msg, a_title, a_txt, b_title, b_txt, c_title, c_txt ) {
 	choice_B.style.opacity = "1.0";
 	choice_C.style.opacity = "1.0";
 
-	message.innerHTML = msg;
-	choice_A.childNodes[1].innerHTML = a_title;
-	choice_A.childNodes[3].innerHTML = a_txt;
+	message.innerHTML = city.prompt
+	choice_A.childNodes[1].innerHTML = city.choices[0].title;
+	choice_A.childNodes[3].innerHTML = city.choices[0].description;
 
-	choice_B.childNodes[1].innerHTML = b_title;
-	choice_B.childNodes[3].innerHTML = b_txt;
+	choice_B.childNodes[1].innerHTML = city.choices[0].title;
+	choice_B.childNodes[3].innerHTML = city.choices[0].description;
 
-	choice_C.childNodes[1].innerHTML = c_title;
-	choice_C.childNodes[3].innerHTML = c_txt;
+	choice_C.childNodes[1].innerHTML = city.choices[0].title;
+	choice_C.childNodes[3].innerHTML = city.choices[0].description;
 
 	showDrawer();
 }
@@ -173,9 +172,16 @@ function selectChoiceA() {
 	choice_B.style.opacity = "0.3"
 	choice_C.style.opacity = "0.3"
 	newActionFeedItem("Sprouted wings and flew away.");
-	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
+
+   if (curSection == 13) {
+      aboutToEnd = true;
+      hideDrawer();
+   }
+   else {
+	   setTimeout(hideDrawer, hideDelay);
+   }
 }
 
 function selectChoiceB() {
@@ -186,6 +192,14 @@ function selectChoiceB() {
 	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
+
+   if (curSection == 13) {
+      aboutToEnd = true;
+      hideDrawer();
+   }
+   else {
+	   setTimeout(hideDrawer, hideDelay);
+   }
 }
 
 function selectChoiceC() {
@@ -196,6 +210,14 @@ function selectChoiceC() {
 	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
+
+   if (curSection == 13) {
+      aboutToEnd = true;
+      hideDrawer();
+   }
+   else {
+	   setTimeout(hideDrawer, hideDelay);
+   }
 }
 
 render();
@@ -262,31 +284,31 @@ function render() {
     || (curSection == 11 && !sec11seen) || (curSection == 13 && !sec13seen)) {
 
       if (curSection == 3) {
-      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
+      	 presentChoices(data["Chicago"]);
          sec3seen = true;
       }
       else if (curSection == 5) {
-      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
+      	 presentChoices("Chicago");
          sec5seen = true;
       }
       else if (curSection == 7) {
-      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
+      	 presentChoices("Chicago");
          sec7seen = true;
       }
       else if (curSection == 8) {
-      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
+      	 presentChoices("Chicago");
          sec8seen = true;
       }
       else if (curSection == 11) {
-      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
+      	 presentChoices("Chicago");
          sec11seen = true;
       }
       else if (curSection == 13) {
-      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
+      	 presentChoices("Chicago");
          sec13seen = true;
       }
-      ++trainSpeed;
       Keys.up = false;
+      ++trainSpeed;
    }
    /* Background */
    ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight + dy, backgroundWidth, backgroundHeight);
@@ -294,7 +316,24 @@ function render() {
    /* Train */
    ctx.drawImage(images.train, 0 + trainPadding, 0 + trainPaddingTop, trainWidth, trainHeight);
 
+   /* End game. */
+   if (aboutToEnd) {
+      choice_required = true; // Takes away movement. 
+
+      drawTrainOff();
+
+      gameOver();
+   }
+
    isDirty= false;
+}
+
+/* Draw forever little train. */
+function drawTrainOff() {
+   i+=5;
+   ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight + dy, backgroundWidth, backgroundHeight);
+   ctx.drawImage(images.train, 0 + trainPadding, 0 + trainPaddingTop - i, trainWidth, trainHeight);
+   requestAnimationFrame(drawTrainOff);
 }
 
 function drawPattern(img, xSize, ySize) {
@@ -335,7 +374,6 @@ function gameOver() {
 }
 
 function tryAgain() {
-	post_game.style.display = "none";
-	gameInfo.style.display = "block";
+   location.reload();
 }
 
