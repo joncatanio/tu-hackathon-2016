@@ -44,6 +44,15 @@ var choice_made;
 var choice_required;
 let hideDelay = 4000;
 
+// ******* Movement *******
+var Keys = {
+   up: false,
+   left: false,
+   right: false
+   },
+   dx = 0,
+   dy = 0;
+
 init();
 
 function init() {
@@ -140,6 +149,13 @@ function showDrawer() {
 }
 
 function presentChoices(msg, a_title, a_txt, b_title, b_txt, c_title, c_txt ) {
+	choice_made = false;
+	choice_required = true;
+
+	choice_A.style.opacity = "1.0";
+	choice_B.style.opacity = "1.0";
+	choice_C.style.opacity = "1.0";
+
 	message.innerHTML = msg;
 	choice_A.childNodes[1].innerHTML = a_title;
 	choice_A.childNodes[3].innerHTML = a_txt;
@@ -182,16 +198,6 @@ function selectChoiceC() {
 	choice_made = true;
 	choice_required = false;
 }
-
-
-// ******* Movement *******
-var Keys = {
-   up: false,
-   left: false,
-   right: false
-   },
-   dx = 0,
-   dy = 0;
 
 render();
 
@@ -255,26 +261,33 @@ function render() {
    if ((curSection == 3 && !sec3seen) || (curSection == 5 && !sec5seen) || 
     (curSection == 7 && !sec7seen) || (curSection == 8 && !sec8seen)
     || (curSection == 11 && !sec11seen) || (curSection == 13 && !sec13seen)) {
-      alert("Choices!");
+
       if (curSection == 3) {
+      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
          sec3seen = true;
       }
       else if (curSection == 5) {
+      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
          sec5seen = true;
       }
       else if (curSection == 7) {
+      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
          sec7seen = true;
       }
       else if (curSection == 8) {
+      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
          sec8seen = true;
       }
       else if (curSection == 11) {
+      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
          sec11seen = true;
       }
       else if (curSection == 13) {
+      	 presentChoices("msg", "a_title", "a_txt", "b_title", "b_txt", "c_title", "c_txt" );
          sec13seen = true;
       }
       ++trainSpeed;
+      Keys.up = false;
    }
    /* Background */
    ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight + dy, backgroundWidth, backgroundHeight);
