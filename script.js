@@ -56,9 +56,8 @@ var Keys = {
 init();
 
 function init() {
-	choice_made = false;
-	choice_required = true;
-	/* drawer elements */
+   choice_made = false;
+   choice_required = true;
 
    drawer = document.getElementById('drawer');
    message = document.getElementById('message');
