@@ -135,7 +135,7 @@ function loadImages(sources, callback) {
 
 var sources = {
    level1: 'images/level1.png',
-   train: 'images/train_cars.png'
+   train: 'images/train_cars.svg'
 };
 
 loadImages(sources, function(images) {
@@ -144,10 +144,10 @@ loadImages(sources, function(images) {
    padding = (windowWidth - backgroundWidth) / 2;
    ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight, backgroundWidth, backgroundHeight); 
 
-   trainWidth = (1/8) * backgroundWidth;
+   trainWidth = (1) * backgroundWidth;
    trainHeight = (images.train.height / images.train.width) * trainWidth;
    trainPadding = padding + (backgroundWidth / 2) - (trainWidth / 2);
-   trainPaddingTop = (1/2) * windowHeight;
+   trainPaddingTop = -(1/6) * windowHeight;//(1) * windowHeight;
    ctx.drawImage(images.train, 0 + trainPadding, 0 + trainPaddingTop, trainWidth, trainHeight);
 
    /* Calculate drawer intervals. */
