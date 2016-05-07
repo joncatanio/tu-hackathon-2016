@@ -29,14 +29,16 @@ var cash;
 
 var post_game;
 
-var lock_choice;
+var choice_made;
+var choice_required;
 let hideDelay = 4000;
 
 init();
 
 function init() {
 	setTimeout(showDrawer, 2000);
-	lock_choice = false;
+	choice_made = false;
+	choice_required = true;
 	/* drawer elements */
 
    drawer = document.getElementById('drawer');
@@ -120,7 +122,7 @@ function hideDrawer() {
 
 function showDrawer() {
 	drawer.style.height = "165px";
-	lock_choice = false;
+	choice_made = false;
 }
 
 function selectChoiceA() {
@@ -129,7 +131,8 @@ function selectChoiceA() {
 	choice_C.style.opacity = "0.3"
 	newActionFeedItem("Sprouted wings and flew away.");
 	setTimeout(hideDrawer, hideDelay);
-	lock_choice = true;
+	choice_made = true;
+	choice_required = false;
 }
 
 function selectChoiceB() {
@@ -138,7 +141,8 @@ function selectChoiceB() {
 	choice_C.style.opacity = "0.3"
 	newActionFeedItem("Sprouted wings and flew away.");
 	setTimeout(hideDrawer, hideDelay);
-	lock_choice = true;
+	choice_made = true;
+	choice_required = false;
 }
 
 function selectChoiceC() {
@@ -147,7 +151,8 @@ function selectChoiceC() {
 	choice_B.style.opacity = "0.3"
 	newActionFeedItem("Sprouted wings and flew away.");
 	setTimeout(hideDrawer, hideDelay);
-	lock_choice = true;
+	choice_made = true;
+	choice_required = false;
 }
 
 
@@ -185,24 +190,24 @@ window.onkeyup = function(e) {
 var isDirty = false;
 
 function update() {
-   if (Keys.up) {
+   if (Keys.up && !choice_required) {
       console.log("up");  
       dy+=trainSpeed;
       isDirty = true;
    }
    else if (Keys.down) {
-      if (!lock_choice) {
+      if (!choice_made) {
       	selectChoiceB();
       }
    }
 
    if (Keys.left) {
-      if (!lock_choice) {
+      if (!choice_made) {
       	selectChoiceA();
       }
    }
    else if (Keys.right) {
-      if (!lock_choice) {
+      if (!choice_made) {
       	selectChoiceC();
       }
    }
