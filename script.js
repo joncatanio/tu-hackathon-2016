@@ -13,6 +13,12 @@ var choice_A;
 var choice_B;
 var choice_C;
 
+var gameInfo;
+var feed;
+var cash;
+
+var post_game;
+
 var lock_choice;
 let hideDelay = 4000;
 
@@ -27,6 +33,12 @@ function init() {
    choice_A = document.getElementById('choice_A');
    choice_B = document.getElementById('choice_B');
    choice_C = document.getElementById('choice_C');
+
+   gameInfo = document.getElementById("game_info");
+   feed = document.getElementById("action_feed");
+   cash = document.getElementById("cash");
+
+   post_game = document.getElementById("post_game");
 
    canvas = document.getElementById('mainScene');
    ctx = canvas.getContext('2d');
@@ -53,6 +65,7 @@ function selectChoiceA() {
 	//choice_A.style.backgroundColor = "whitesmoke"
 	choice_B.style.opacity = "0.3"
 	choice_C.style.opacity = "0.3"
+	newActionFeedItem("Sprouted wings and flew away.");
 	setTimeout(hideDrawer, hideDelay);
 	lock_choice = true;
 }
@@ -61,6 +74,7 @@ function selectChoiceB() {
 	//choice_B.style.backgroundColor = "whitesmoke"
 	choice_A.style.opacity = "0.3"
 	choice_C.style.opacity = "0.3"
+	newActionFeedItem("Sprouted wings and flew away.");
 	setTimeout(hideDrawer, hideDelay);
 	lock_choice = true;
 }
@@ -69,6 +83,7 @@ function selectChoiceC() {
 	//choice_C.style.backgroundColor = "whitesmoke"
 	choice_A.style.opacity = "0.3"
 	choice_B.style.opacity = "0.3"
+	newActionFeedItem("Sprouted wings and flew away.");
 	setTimeout(hideDrawer, hideDelay);
 	lock_choice = true;
 }
@@ -167,3 +182,34 @@ function drawPattern(img, xSize, ySize) {
 
    ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
+
+function updateActionFeedPriorItems() {
+	items = document.getElementsByClassName("feed_item");
+	opacity_increment = 1.0 / items.length;
+	[].forEach.call(items, function(val, index, theArray) {
+		new_opacity = 1.0 - (1.0 - ((index + 1) * opacity_increment));
+		val.style.opacity = new_opacity.toString();
+	});	
+}
+
+function newActionFeedItem(txt) {
+	updateActionFeedPriorItems();
+	setTimeout(feed.insertAdjacentHTML('beforeEnd', '<p class="feed_item">' + txt + '</p>'), 1000);
+}
+
+function updateCashValue(newVal) {
+	cash.innerHTML = newVal.toString();
+}
+
+function gameOver() {
+	gameInfo.style.display = "none";
+	post_game.style.display = "block";
+}
+
+function tryAgain() {
+	post_game.style.display = "none";
+	gameInfo.style.display = "block";
+}
+
+gameOver();
+
