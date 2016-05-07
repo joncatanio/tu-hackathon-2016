@@ -49,6 +49,7 @@ var post_game;
 
 var choice_made;
 var choice_required;
+
 var hideDelay = 4000;
 
 var CURRENT_SCORE = 710;
@@ -153,7 +154,7 @@ function hideDrawer() {
 
 function showDrawer() {
 	h = $(window).height();
-	drawer.style.height = (h/3).toString() + "px";
+	drawer.style.height = (h/2).toString() + "px";
 	choice_made = false;
 }
 
@@ -169,15 +170,16 @@ function presentChoices(city) {
 	choice_B.style.opacity = "1.0";
 	choice_C.style.opacity = "1.0";
 
+	console.log(choice_A.childNodes);
 	message.innerHTML = city.prompt
-	choice_A.childNodes[1].innerHTML = city.choices[0].title;
-	choice_A.childNodes[3].innerHTML = city.choices[0].description;
+	choice_A.childNodes[4].innerHTML = city.choices[0].title;
+	choice_A.childNodes[6].innerHTML = city.choices[0].description;
 
-	choice_B.childNodes[1].innerHTML = city.choices[1].title;
-	choice_B.childNodes[3].innerHTML = city.choices[1].description;
+	choice_B.childNodes[4].innerHTML = city.choices[1].title;
+	choice_B.childNodes[6].innerHTML = city.choices[1].description;
 
-	choice_C.childNodes[1].innerHTML = city.choices[2].title;
-	choice_C.childNodes[3].innerHTML = city.choices[2].description;
+	choice_C.childNodes[4].innerHTML = city.choices[2].title;
+	choice_C.childNodes[6].innerHTML = city.choices[2].description;
 
 	showDrawer();
 }
@@ -413,7 +415,7 @@ function newActionFeedItem(txt) {
 }
 
 function updateCashValue(newVal) {
-	cashcount.innerHTML = newVal.toString();
+	cashcount.innerHTML = "$" + newVal.toString();
 }
 
 function gameOver() {
