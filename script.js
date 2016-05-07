@@ -6,8 +6,16 @@ var windowWidth;
 var backgroundWidth;
 var backgroundHeight;
 var padding;
+var trainWidth;
+var trainHeight;
+var trainPadding;
+var trainPaddingTop;
 
+/* Images */
 var images;
+
+/* Movement/Functionality */
+var trainSpeed = 10;
 
 /* drawer elements */
 var drawer;
@@ -78,7 +86,8 @@ function loadImages(sources, callback) {
 }
 
 var sources = {
-   level1: 'images/level1.png'
+   level1: 'images/level1.png',
+   train: 'images/train_cars.png'
 };
 
 loadImages(sources, function(images) {
@@ -91,8 +100,13 @@ loadImages(sources, function(images) {
    backgroundWidth = (1 / 2) * windowWidth;
    backgroundHeight = (images.level1.height / images.level1.width) * backgroundWidth;
    padding = (windowWidth - backgroundWidth) / 2;
-
    ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight, backgroundWidth, backgroundHeight); 
+
+   trainWidth = (1/8) * backgroundWidth;
+   trainHeight = (images.train.height / images.train.width) * trainWidth;
+   trainPadding = padding + (backgroundWidth / 2) - (trainWidth / 2);
+   trainPaddingTop = (1/2) * windowHeight;
+   ctx.drawImage(images.train, 0 + trainPadding, 0 + trainPaddingTop, trainWidth, trainHeight);
 
   // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   // ctx.fillStyle = ctx.createPattern(tempCanvas, 'repeat');
@@ -173,7 +187,7 @@ var isDirty = false;
 function update() {
    if (Keys.up) {
       console.log("up");  
-      dy+=5;
+      dy+=trainSpeed;
       isDirty = true;
    }
    else if (Keys.down) {
@@ -199,9 +213,12 @@ function update() {
 requestAnimationFrame(update);
 
 function render() {
-   //ctx.setTransform(1,0,0,1,dx,dy);
-   //ctx.fillRect(-dx, -dy, ctx.canvas.width, ctx.canvas.height);
+   /* Background */
    ctx.drawImage(images.level1, 0 + padding, -backgroundHeight + windowHeight + dy, backgroundWidth, backgroundHeight);
+
+   /* Train */
+   ctx.drawImage(images.train, 0 + trainPadding, 0 + trainPaddingTop, trainWidth, trainHeight);
+
    isDirty= false;
 }
 
