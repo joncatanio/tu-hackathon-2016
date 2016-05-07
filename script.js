@@ -4,6 +4,8 @@ var ctx;
 
 /* Images */
 var img_chicago;
+var img_iowa;
+var img_filler1;
 
 /* drawer elements */
 var drawer;
@@ -31,12 +33,10 @@ function init() {
    ctx.canvas.width  = window.innerWidth;
    ctx.canvas.height = window.innerHeight;
    
-   img_chicago = new Image(ctx.canvas.width, ctx.canvas.height);
-   img_chicago.src = 'images/ricknmorty.jpg';
+   img_chicago = new Image();
+   img_chicago.src = 'images/c1.png';
    img_chicago.onload = function() {
-      var pattern = ctx.createPattern(this, "repeat");
-      ctx.fillStyle = pattern;
-      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      drawPattern(img_chicago, ctx.canvas.width, ctx.canvas.height);
    }
 }
 
@@ -120,7 +120,8 @@ function update() {
       }
 
       /* May not need to render changes if the boxes are just selecting. */
-      //isDirty = true;
+      dy-=3;
+      isDirty = true;
    }
 
    if (Keys.left) {
@@ -153,3 +154,16 @@ function render() {
    isDirty= false;
 }
 
+function drawPattern(img, xSize, ySize) {
+   var tempCanvas = document.createElement("canvas"),
+      tCtx = tempCanvas.getContext("2d");
+
+   tempCanvas.width = xSize;
+   tempCanvas.height = ySize;
+   tCtx.drawImage(img, 0, 0, img.width, img.height, 0, 0, xSize, ySize);
+
+   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+   ctx.fillStyle = ctx.createPattern(tempCanvas, 'no-repeat');
+
+   ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
