@@ -39,6 +39,10 @@ var sec13seen;
 var gameInfo;
 var feed;
 var cash;
+var salary;
+var choiceA;
+var choiceB;
+var choiceC;
 var aboutToEnd; 
 
 var post_game;
@@ -65,6 +69,10 @@ function init() {
    choice_made = false;
    choice_required = true;
    aboutToEnd = false;
+
+   /* Default Cash/Salary */
+   cash = 5000
+   salary = 7000
 
    drawer = document.getElementById('drawer');
    message = document.getElementById('message');
@@ -153,6 +161,10 @@ function presentChoices(city) {
 	choice_made = false;
 	choice_required = true;
 
+   choiceA = city.choices[0];
+   choiceB = city.choices[1];
+   choiceC = city.choices[2];
+
 	choice_A.style.opacity = "1.0";
 	choice_B.style.opacity = "1.0";
 	choice_C.style.opacity = "1.0";
@@ -161,11 +173,11 @@ function presentChoices(city) {
 	choice_A.childNodes[1].innerHTML = city.choices[0].title;
 	choice_A.childNodes[3].innerHTML = city.choices[0].description;
 
-	choice_B.childNodes[1].innerHTML = city.choices[0].title;
-	choice_B.childNodes[3].innerHTML = city.choices[0].description;
+	choice_B.childNodes[1].innerHTML = city.choices[1].title;
+	choice_B.childNodes[3].innerHTML = city.choices[1].description;
 
-	choice_C.childNodes[1].innerHTML = city.choices[0].title;
-	choice_C.childNodes[3].innerHTML = city.choices[0].description;
+	choice_C.childNodes[1].innerHTML = city.choices[2].title;
+	choice_C.childNodes[3].innerHTML = city.choices[2].description;
 
 	showDrawer();
 }
@@ -178,9 +190,19 @@ function selectChoiceA() {
 	choice_made = true;
 	choice_required = false;
 
+   /* Add cash and update salary. */
+   salary += choiceA.salary_change;
+   cash += choiceA.cash_change + choiceA.salary_change;
+
    if (curSection == 13) {
       aboutToEnd = true;
       hideDrawer();
+   }
+   else if (curSection == 7) {
+      setTimeout(hideDrawer, 500);
+   }
+   else if (curSection == 11) {
+      setTimeout(hideDrawer, 750);
    }
    else {
 	   setTimeout(hideDrawer, hideDelay);
@@ -196,9 +218,19 @@ function selectChoiceB() {
 	choice_made = true;
 	choice_required = false;
 
+   /* Add cash and update salary. */
+   salary += choiceB.salary_change;
+   cash += choiceB.cash_change + choiceB.salary_change;
+
    if (curSection == 13) {
       aboutToEnd = true;
       hideDrawer();
+   }
+   else if (curSection == 7) {
+      setTimeout(hideDrawer, 500);
+   }
+   else if (curSection == 11) {
+      setTimeout(hideDrawer, 750);
    }
    else {
 	   setTimeout(hideDrawer, hideDelay);
@@ -214,9 +246,19 @@ function selectChoiceC() {
 	choice_made = true;
 	choice_required = false;
 
+   /* Add cash and update salary. */
+   salary += choiceC.salary_change;
+   cash += choiceC.cash_change + choiceC.salary_change;
+
    if (curSection == 13) {
       aboutToEnd = true;
       hideDrawer();
+   }
+   else if (curSection == 7) {
+      setTimeout(hideDrawer, 500);
+   }
+   else if (curSection == 11) {
+      setTimeout(hideDrawer, 750);
    }
    else {
 	   setTimeout(hideDrawer, hideDelay);
@@ -287,27 +329,27 @@ function render() {
     || (curSection == 11 && !sec11seen) || (curSection == 13 && !sec13seen)) {
 
       if (curSection == 3) {
-      	 presentChoices(data["Chicago"]);
+      	 presentChoices(data["Iowa"]);
          sec3seen = true;
       }
       else if (curSection == 5) {
-      	 presentChoices("Chicago");
+      	 presentChoices(data["Denver"]);
          sec5seen = true;
       }
       else if (curSection == 7) {
-      	 presentChoices("Chicago");
+      	 presentChoices(data["Aspen"]);
          sec7seen = true;
       }
       else if (curSection == 8) {
-      	 presentChoices("Chicago");
+      	 presentChoices(data["Vegas"]);
          sec8seen = true;
       }
       else if (curSection == 11) {
-      	 presentChoices("Chicago");
+      	 presentChoices(data["Death_Valley"]);
          sec11seen = true;
       }
       else if (curSection == 13) {
-      	 presentChoices("Chicago");
+      	 presentChoices(data["SLO"]);
          sec13seen = true;
       }
       Keys.up = false;
