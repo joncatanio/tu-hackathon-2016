@@ -7,8 +7,26 @@
 	margin: 0;
 }
 
+canvas {
+   /*cursor: none;*/
+}
+
+html, body {
+  width:  100%;
+  height: 100%;
+}
+
 body {
 	font-family: "Intro"
+}
+
+#drawer {
+	transition:height 1s ease-out;
+    height:0;
+    overflow:hidden;
+    position: absolute;
+    z-index: 2;
+    top: 0;
 }
 
 #drawer_main {
@@ -48,5 +66,26 @@ body {
 	margin: auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
 
+#game_info {
+	position: absolute;
+	width: 250px;
+	height: 150px;
+	background-color: white;
+	z-index: 2;
+	right: 0px;
+    bottom: 0px;
+}
+
+#action_feed {
+	text-align: right;
+	font-size: 15px;
+	padding: 10px;
+}
+
+#cash {
+	text-align: right;
+	padding: 10px;
+	font-size: 25px;
 }
