@@ -54,6 +54,11 @@ var hideDelay = 4000;
 
 var CURRENT_SCORE = 710;
 
+var cashcount;
+var scorecount;
+var endDetails;
+var finalScore;
+
 // ******* Movement *******
 var Keys = {
    up: false,
@@ -84,6 +89,10 @@ function init() {
    gameInfo = document.getElementById("game_info");
    feed = document.getElementById("action_feed");
    cashcount = document.getElementById("cash");
+   scorecount = document.getElementById("score");
+
+   endDetails = document.getElementById("endDetails");
+   finalScore = document.getElementById("final_credit_score");
 
    post_game = document.getElementById("post_game");
 
@@ -188,7 +197,7 @@ function selectChoiceA() {
 	//choice_A.style.backgroundColor = "whitesmoke"
 	choice_B.style.opacity = "0.3"
 	choice_C.style.opacity = "0.3"
-	newActionFeedItem("Sprouted wings and flew away.");
+	newActionFeedItem(choice_A.title);
 	choice_made = true;
 	choice_required = false;
 
@@ -196,6 +205,8 @@ function selectChoiceA() {
    salary += choiceA.salary_change;
    cash += choiceA.cash_change + choiceA.salary_change;
    updateCashValue(cash);
+
+   updateScoreViaSimulator(choiceA.type, choiceA.param);
 
    if (curSection == 13) {
       aboutToEnd = true;
@@ -216,7 +227,7 @@ function selectChoiceB() {
 	//choice_B.style.backgroundColor = "whitesmoke"
 	choice_A.style.opacity = "0.3"
 	choice_C.style.opacity = "0.3"
-	newActionFeedItem("Sprouted wings and flew away.");
+	newActionFeedItem(choiceB.title);
 	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
@@ -225,6 +236,8 @@ function selectChoiceB() {
    salary += choiceB.salary_change;
    cash += choiceB.cash_change + choiceB.salary_change;
    updateCashValue(cash);
+
+   updateScoreViaSimulator(choiceB.type, choiceB.param);
 
    if (curSection == 13) {
       aboutToEnd = true;
@@ -245,7 +258,7 @@ function selectChoiceC() {
 	//choice_C.style.backgroundColor = "whitesmoke"
 	choice_A.style.opacity = "0.3"
 	choice_B.style.opacity = "0.3"
-	newActionFeedItem("Sprouted wings and flew away.");
+	newActionFeedItem(choiceC.title);
 	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
@@ -254,6 +267,8 @@ function selectChoiceC() {
    salary += choiceC.salary_change;
    cash += choiceC.cash_change + choiceC.salary_change;
    updateCashValue(cash);
+
+   updateScoreViaSimulator(choiceC.type, choiceC.param);
 
    if (curSection == 13) {
       aboutToEnd = true;
@@ -419,6 +434,8 @@ function updateCashValue(newVal) {
 }
 
 function gameOver() {
+	finalScore.innerHTML = CURRENT_SCORE.toString();
+	endDetails.innerHTML = CURRENT_SCORE.toString() + ", $" + cash.toString();
 	gameInfo.style.display = "none";
 	post_game.style.display = "block";
 }
@@ -431,8 +448,9 @@ function updateScoreViaSimulator(req_type, req_param) {
 
 	req = {
 		'score': CURRENT_SCORE,
+		'event': {}
 	}
-	req[req_type] = req_param
+	req['event'][req_type] = req_param
 
 	$.ajax({
 			dataType: "json",
@@ -440,7 +458,7 @@ function updateScoreViaSimulator(req_type, req_param) {
 			url: "http://ec2-52-53-177-180.us-west-1.compute.amazonaws.com/score-simulator/scoresim/simulateScore",
 			type: "POST",
 			data: JSON.stringify(req),
-			success: function(res) { console.log(res['score'], res['description_text'][0]);  },
+			success: function(res) { scorecount.innerHTML = res['score'];  },
 			error:   function(res) { console.warn(res); }
 		});
 }
