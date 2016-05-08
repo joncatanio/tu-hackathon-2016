@@ -9,6 +9,7 @@ var data = {
 				'description': "You'll use the extra income to add a new car to your train.",
 				'cash_change': 0,
 				'salary_change': 4000,
+				'icon': 'images/icons/biz.png',
 			},
 
 			{
@@ -18,15 +19,17 @@ var data = {
 				'description': "You barely make ends meet and filed for bankruptcy, but hey... it's first class!",
 				'cash_change': 0,
 				'salary_change': -1000,
+				'icon': 'images/icons/biz.png',
 			},
 
 			{
 				'type': 'win_large_sum',
-				'param': 'EX_TRASHES_YOUR_CREDIT',
+				'param': 'NO_EFFECT',
 				'title': "Lottery Winner!",
 				'description': "You win $500,000! Spend it wisely... May we suggest to invest?",
 				'cash_change': 500000,
 				'salary_change': 0,
+				'icon': 'images/icons/dollar.png',
 			}
 		]
 	},
@@ -41,6 +44,7 @@ var data = {
 				'description': "Your train will run more efficiently and eventually you'll pay off your school loans!",
 				'cash_change': 0,
 				'salary_change': -150,
+				'icon': 'images/icons/grad.png',
 			},
 
 			{
@@ -50,6 +54,7 @@ var data = {
 				'description': "Get a nice piece of land, someday you might want to settle down!",
 				'cash_change': 0,
 				'salary_change': -500,
+				'icon': 'images/icons/mortgage.png',
 			},
 
 			{
@@ -59,6 +64,7 @@ var data = {
 				'description': "Instead of paying attention you take a selfie with your official conductors club card and post it online...",
 				'cash_change': -5000,
 				'salary_change': 0,
+				'icon': 'images/icons/phone.png',
 			}
 		]
 	},
@@ -73,6 +79,7 @@ var data = {
 				'description': "Sometimes it just doesn't work out, they drained your wallet anyways!",
 				'cash_change': 5000,
 				'salary_change': 1000,
+				'icon': 'images/icons/wedding.png',
 			},
 
 			{
@@ -82,6 +89,7 @@ var data = {
 				'description': "What else is there to do on a train rolling through the Rocky Mountains other than stream Netflix. There was a breach and you may have been affected!",
 				'cash_change': 1000,
 				'salary_change': 0,
+				'icon': 'images/icons/unlock.png',
 			},
 
 			{
@@ -91,6 +99,7 @@ var data = {
 				'description': "Your waiter in the first class car stole your card and copied it. You took the right measures and handle it well though!",
 				'cash_change': 1000,
 				'salary_change': 0,
+				'icon': 'images/icons/cc.png',
 			}
 		]
 	},
@@ -105,6 +114,7 @@ var data = {
 				'description': "You went skiing and took a serious fall, just pay the bill and get back on the slopes!",
 				'cash_change': 1000,
 				'salary_change': 0,
+				'icon': 'images/icons/doc.png',
 			},
 
 			{
@@ -114,6 +124,7 @@ var data = {
 				'description': "You're practically stealing condos at this price!",
 				'cash_change': -8000,
 				'salary_change': 0,
+				'icon': 'images/icons/mortgage.png',
 			},
 
 			{
@@ -123,6 +134,7 @@ var data = {
 				'description': "Inspired by a world renowned fast-food chef here in Aspen you decide to pursue your dream as the head assistant to the part-time chef on your train... Don't forget that you have payments to make.",
 				'cash_change': 0,
 				'salary_change': -1000,
+				'icon': 'images/icons/biz.png',
 			}
 		]
 	},
@@ -137,6 +149,7 @@ var data = {
 				'description': "Hey, just because it's a train doesn't mean it's legal! Vegas baby!",
 				'cash_change': -15000,
 				'salary_change': -1000,
+				'icon': 'images/icons/fraud.png',
 			},
 
 			{
@@ -146,6 +159,7 @@ var data = {
 				'description': "You just met, but their credit is too good not to lock down! Vegas baby!",
 				'cash_change': 0,
 				'salary_change': 4000,
+				'icon': 'images/icons/wedding.png',
 			},
 
 			{
@@ -155,6 +169,7 @@ var data = {
 				'description': "By big we mean you hit a $25,000 jackpot but you've already lost $30,000... Vegas baby!",
 				'cash_change': -5000,
 				'salary_change': 0,
+				'icon': 'images/icons/dollar.png',
 			}
 		]
 	},
@@ -169,6 +184,7 @@ var data = {
 				'description': "Well, it is the hottest place on Earth... you need to figure out how to pay those medical bills.",
 				'cash_change': -2000,
 				'salary_change': 0,
+				'icon': 'images/icons/doc.png',
 			},
 
 			{
@@ -178,6 +194,7 @@ var data = {
 				'description': "Is that a zombie in the distance?!",
 				'cash_change': 0,
 				'salary_change': 0,
+				'icon': 'images/icons/doc.png',
 			},
 
 			{
@@ -187,6 +204,7 @@ var data = {
 				'description': "A mysterious man standing next to a cactus hands you a briefcase.",
 				'cash_change': 10000,
 				'salary_change': 0,
+				'icon': 'images/icons/dollar.png',
 			}
 		]
 	},
@@ -201,15 +219,17 @@ var data = {
 				'description': "You've made it across the country and through college time to pay off those loans!",
 				'cash_change': -10000,
 				'salary_change': 0,
+				'icon': 'images/icons/grad.png',
 			},
 
 			{
-				'type': 'forgot_to_shred_mail',
-				'param': 'IDENTITY_STOLEN',
+				'type': 'stolen_debit_card',
+				'param': 'REPORTED',
 				'title': "...Shred. Your. Mail.",
 				'description': "You forgot to shred your mail in Chicago. Somebody else is you now, congrats!",
 				'cash_change': -5000,
 				'salary_change': 0,
+				'icon': 'images/icons/fraud.png',
 			},
 
 			{
@@ -219,6 +239,7 @@ var data = {
 				'description': "You worked really hard to make it here! Maybe your worth of a promotion, but more importantly that new boat!",
 				'cash_change': -40000,
 				'salary_change': 7000,
+				'icon': 'images/icons/biz.png',
 			}
 		]
 	}
