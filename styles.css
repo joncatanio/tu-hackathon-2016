@@ -127,6 +127,7 @@ body {
 }
 
 #final_title_message {
+   color: #0295BE;
 	float: left;
 }
 
@@ -137,6 +138,7 @@ body {
 }
 
 #final_credit_score {
+   color: #0295BE;
 	float: right;
 }
 
@@ -145,11 +147,11 @@ body {
 }
 
 #try_again {
-	font-size: 25px;
+	font-size: 15px;
 	color: #0295BE;
 	font-weight: bold;
 	text-align: center;
-	margin-top: 25px;
+	margin-top: 10px;
 	cursor: pointer;
 }
 

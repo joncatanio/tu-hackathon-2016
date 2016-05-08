@@ -43,14 +43,15 @@ var salary;
 var choiceA;
 var choiceB;
 var choiceC;
-var aboutToEnd; 
+var aboutToEnd;
+var endMessage; 
 
 var post_game;
 
 var choice_made;
 var choice_required;
 
-var hideDelay = 4000;
+var hideDelay = 2000;
 
 var CURRENT_SCORE = 710;
 
@@ -93,6 +94,7 @@ function init() {
 
    endDetails = document.getElementById("endDetails");
    finalScore = document.getElementById("final_credit_score");
+   endMessage = document.getElementById("final_title_message");
 
    post_game = document.getElementById("post_game");
 
@@ -110,7 +112,7 @@ function init() {
       //ctx.drawImage(level1, 0, -level1.height + windowHeight);
    }*/
 
-   setTimeout(presentChoices(data['Chicago']), 2000);
+   setTimeout(presentChoices(data['Chicago']), 1500);
 }
 
 /***** Load Images *****/
@@ -231,7 +233,6 @@ function selectChoiceB() {
 	choice_A.style.opacity = "0.3"
 	choice_C.style.opacity = "0.3"
 	newActionFeedItem(choiceB.title);
-	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
 
@@ -262,7 +263,6 @@ function selectChoiceC() {
 	choice_A.style.opacity = "0.3"
 	choice_B.style.opacity = "0.3"
 	newActionFeedItem(choiceC.title);
-	setTimeout(hideDrawer, hideDelay);
 	choice_made = true;
 	choice_required = false;
 
@@ -445,6 +445,16 @@ function gameOver() {
 	endDetails.innerHTML = CURRENT_SCORE.toString() + ", $" + cash.toString();
 	gameInfo.style.display = "none";
 	post_game.style.display = "block";
+
+   if (CURRENT_SCORE >= 700) {
+      endMessage.innerHTML = "GOOD LOOKIN' SCORE!";
+   }
+   else if (CURRENT_SCORE < 700 && CURRENT_SCORE > 550) {
+      endMessage.innerHTML = "YOU CAN DO BETTER!";
+   }
+   else {
+      endMessage.innerHTML = "HMM... TRY A BIT HARDER!";
+   }
 }
 
 function tryAgain() {
