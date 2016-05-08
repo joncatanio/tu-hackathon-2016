@@ -82,7 +82,7 @@ body {
 
 #game_info {
 	position: absolute;
-	width: 250px;
+	width: 350px;
 	height: 300px;
 	background-color: white;
 	z-index: 2;
@@ -92,7 +92,7 @@ body {
 
 #action_feed {
 	text-align: right;
-	font-size: 25px;
+	font-size: 15px;
 	position: absolute;
 	bottom: 215px;
 	right: 30px;

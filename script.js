@@ -432,7 +432,7 @@ function drawPattern(img, xSize, ySize) {
 
 function updateActionFeedPriorItems() {
 	items = document.getElementsByClassName("feed_item");
-	opacity_increment = 1.0 / items.length;
+	opacity_increment = 0.5 / items.length;
 	[].forEach.call(items, function(val, index, theArray) {
 		new_opacity = 1.0 - (1.0 - ((index + 1) * opacity_increment));
 		val.style.opacity = new_opacity.toString();
