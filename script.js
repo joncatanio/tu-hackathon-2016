@@ -213,6 +213,10 @@ function selectChoiceA() {
 
    updateScoreViaSimulator(choiceA.type, choiceA.param);
 
+   if (choiceA.salary_change) {
+   		newActionFeedItem("Salary change: " + choiceA.salary_change + " (" + salary + ")");
+   }
+
    if (curSection == 13) {
       aboutToEnd = true;
       hideDrawer();
@@ -243,6 +247,10 @@ function selectChoiceB() {
 
    updateScoreViaSimulator(choiceB.type, choiceB.param);
 
+   if (choiceB.salary_change) {
+   		newActionFeedItem("Salary change: " + choiceB.salary_change + " (" + salary + ")");
+   }
+
    if (curSection == 13) {
       aboutToEnd = true;
       hideDrawer();
@@ -265,6 +273,10 @@ function selectChoiceC() {
 	newActionFeedItem(choiceC.title);
 	choice_made = true;
 	choice_required = false;
+
+	if (choiceC.salary_change) {
+   		newActionFeedItem("Salary change: " + choiceC.salary_change + "(" + salary + ")");
+   }
 
    /* Add cash and update salary. */
    salary += choiceC.salary_change;
